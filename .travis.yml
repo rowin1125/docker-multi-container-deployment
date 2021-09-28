@@ -1,0 +1,35 @@
+sudo: required
+language: generic
+services:
+  - docker
+
+before_install:
+  - docker build -t rowin1125/react-test -f ./client/Dockerfile.dev ./client
+
+script:
+  - docker run -e CI=true rowin1125/react-test npm test
+
+after_success:
+  - docker build -t rowin1125/multi-client ./client
+  - docker build -t rowin1125/multi-nginx ./nginx
+  - docker build -t rowin1125/multi-server ./server
+  - docker build -t rowin1125/multi-worker ./worker
+  # Login in docker cli in a single command
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --passowrd-stdin
+  # Push to docher hub
+  - docker push rowin1125/multi-client
+  - docker push rowin1125/multi-nginx
+  - docker push rowin1125/multi-server
+  - docker push rowin1125/multi-worker
+
+# deploy:
+#   provider: elasticbeanstalk
+#   region: "eu-central-1"
+#   app: "docker-react"
+#   env: "Dockerreact-env"
+#   bucket_name: "elasticbeanstalk-eu-central-1-399100690592"
+#   bucket_path: "docker-react"
+#   on:
+#     branch: main
+#   access_key_id: $AWS_ACCESS_KEY
+#   secret_access_key: $AWS_SECRET_KEY
