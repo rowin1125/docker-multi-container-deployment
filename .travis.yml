@@ -15,7 +15,7 @@ after_success:
   - docker build -t rowin1125/multi-server ./server
   - docker build -t rowin1125/multi-worker ./worker
   # Login in docker cli in a single command
-  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --passowrd-stdin
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
   # Push to docher hub
   - docker push rowin1125/multi-client
   - docker push rowin1125/multi-nginx
