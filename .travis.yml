@@ -22,14 +22,14 @@ after_success:
   - docker push rowin1125/multi-server
   - docker push rowin1125/multi-worker
 
-# deploy:
-#   provider: elasticbeanstalk
-#   region: "eu-central-1"
-#   app: "docker-react"
-#   env: "Dockerreact-env"
-#   bucket_name: "elasticbeanstalk-eu-central-1-399100690592"
-#   bucket_path: "docker-react"
-#   on:
-#     branch: main
-#   access_key_id: $AWS_ACCESS_KEY
-#   secret_access_key: $AWS_SECRET_KEY
+deploy:
+  provider: elasticbeanstalk
+  region: "eu-central-1"
+  app: "docker-multi-container"
+  env: "Dockermulticontainer-env"
+  bucket_name: "elasticbeanstalk-eu-central-1-399100690592"
+  bucket_path: "docker-multi-container"
+  on:
+    branch: main
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_KEY
