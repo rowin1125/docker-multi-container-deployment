@@ -1,11 +1,11 @@
 version: "3"
 services:
   client:
-    image: "rowin1125/multi-client-10-14"
+    image: "rowin1125/multi-client"
     mem_limit: 128m
     hostname: client
   server:
-    image: "rowin1125/multi-server-10-14"
+    image: "rowin1125/multi-server"
     mem_limit: 128m
     hostname: api
     environment:
@@ -17,14 +17,14 @@ services:
       - PGPASSWORD=$PGPASSWORD
       - PGPORT=$PGPORT
   worker:
-    image: "rowin1125/multi-worker-10-14"
+    image: "rowin1125/multi-worker"
     mem_limit: 128m
     hostname: worker
     environment:
       - REDIS_HOST=$REDIS_HOST
       - REDIS_PORT=$REDIS_PORT
   nginx:
-    image: "rowin1125/multi-nginx-10-14"
+    image: "rowin1125/multi-nginx"
     mem_limit: 128m
     hostname: nginx
     ports:
